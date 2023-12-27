@@ -1,0 +1,138 @@
+<form [formGroup]="form"  (ngSubmit)="save($event)">
+  <div formGroupName="fullName" >
+    <mat-form-field appearance="fill">
+      <mat-label>Name: {{ nameField.value }}</mat-label>
+      <input matInput type="text" formControlName="name">
+      <mat-icon matSuffix *ngIf="isNameFieldValid">done</mat-icon>
+      <mat-icon matSuffix *ngIf="isNameFieldInvalid">close</mat-icon>
+    </mat-form-field>
+    <div class="messages" [class.active]="isNameFieldInvalid">
+      <mat-error *ngIf="nameField.hasError('required')">Este campo es Requerido</mat-error>
+      <mat-error *ngIf="nameField.hasError('minlength')">Debe de tener minimo 5 caracteres</mat-error>
+      <mat-error *ngIf="nameField.hasError('pattern')">Solo caracteres permitidos</mat-error>
+    </div>
+
+    <p>
+      LastName: {{ lastNameField.value }} {{ lastNameField.valid }}
+      <input
+        [class.is-valid]="isLastNameFieldValid"
+        [class.is-invalid]="isLastNameFieldInvalid"
+        type="text"
+        formControlName="name"
+        />
+      <button [disabled]="lastNameField.invalid" (click)="getLastNameValue()">
+        Get Value
+      </button>
+    </p>
+
+    <div class="messages" [class.active]="isLastNameFieldInvalid">
+      <p>
+        <strong *ngIf="lastNameField.hasError('required')">
+          Este campo es Requerido
+        </strong>
+      </p>
+      <p>
+        <strong *ngIf="lastNameField.hasError('minlength')">
+          Debe de tener minimo 5 caracteres
+        </strong>
+      </p>
+      <p>
+        <strong *ngIf="lastNameField.hasError('pattern')">
+          Solo caracteres permitidos
+        </strong>
+      </p>
+    </div>
+  </div>
+
+  <p>
+    Email: {{ emailField.value }}
+    <input type="email" [formControl]="emailField" />
+  </p>
+  <div class="messages" [class.active]="emailField.touched && isNameFieldInvalid">
+    <p>
+      <strong *ngIf="emailField.hasError('required')">
+        Este campo es Requerido
+      </strong>
+    </p>
+    <p>
+      <strong *ngIf="emailField.hasError('email')">
+        Debe ser de tipo email
+      </strong>
+    </p>
+  </div>
+
+  <p>
+    Phone number: {{ phoneNumberField.value }}
+    <input type="tel" [formControl]="phoneNumberField" />
+  </p>
+  <div class="messages" [class.active]="phoneNumberField.touched && phoneNumberField.invalid">
+    <p>
+      <strong *ngIf="phoneNumberField.hasError('required')">
+        Este campo es Requerido
+      </strong>
+    </p>
+    <p>
+      <strong *ngIf="phoneNumberField.hasError('min')">
+        Debe ser mayor de edad (18)
+      </strong>
+    </p>
+  </div>
+
+  <p>
+    Category: {{ categoryField.value }}
+    <select [formControl]="categoryField" multiple size="8">
+      <option value="casa-1">casa-1</option>
+      <option value="casa-2">casa-2</option>
+      <option value="casa-3">casa-3</option>
+      <option value="casa-4">casa-4</option>
+      <option value="casa-5">casa-5</option>
+      <option value="casa-6">casa-6</option>
+      <option value="casa-7">casa-7</option>
+      <option value="casa-8">casa-8</option>
+      <option value="casa-9">casa-9</option>
+      <option value="casa-10">casa-10</option>
+      <option value="casa-11">casa-11</option>
+      <option value="casa-12">casa-12</option>
+    </select>
+  </p>
+
+  <p>
+    Agree: {{ agreeField.value }}
+    <input type="checkbox" [formControl]="agreeField" />
+  </p>
+
+  <p>
+    <label>
+      <input name="gender" type="radio" values="male" [formControl]="genderField" />
+      Male
+    </label>
+    <label>
+      <input name="gender" type="radio" values="female" [formControl]="genderField" />
+      Female
+    </label>
+    <label>
+      <input name="gender" type="radio" values="other" [formControl]="genderField" />
+      Others
+    </label>
+  </p>
+
+  <p>
+    <label>
+      <input name="zone" type="radio" values="zone-1" [formControl]="zoneField" />
+      zone-1
+    </label>
+    <label>
+      <input name="zone" type="radio" values="zone-2" [formControl]="zoneField" />
+      zone-2
+    </label>
+    <label>
+      <input name="zone" type="radio" values="zone-3" [formControl]="zoneField" />
+      zone-3
+    </label>
+  </p>
+
+  <p>
+    <button type="submit">Enviar</button>
+  </p>
+
+</form>
